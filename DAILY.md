@@ -10,11 +10,11 @@
 
 ## 1. 대본 (Claude)
 - 웹 검색으로 사실을 확인한다. 확실한 사실만 쓰고, 출처 URL을 `episodes/NNN_동물/facts.md`에 남긴다.
-- 구성 (총 35~45초, 문장 끝은 대화체 "~래요/~거든요"):
+- 구성 (총 30~40초, 문장 끝은 대화체 "~래요/~거든요"):
   1. 훅 1문장: 가장 충격적인 사실
   2. 스킬① ② ③: 각 1~2문장, 자막은 "스킬① 심장 3개" 형식
   3. 도감 카드 장면: "도감 등록 완료! ○○의 등급은... S!" (card: true)
-  4. 예고: "내일 도감 No.XXX는, ○○입니다!" (schedule.json의 다음 날 동물)
+  (다음 편 예고는 넣지 않는다. 도감 카드 장면으로 끝낸다.)
 - `episodes/NNN_동물/script.json` 작성. 형식은 `pipeline/script_short01_el.json` + 아래 필드:
   - `series`: "사기캐 동물도감 · No.NNN", `dex_no`: "도감 No.NNN", `mascot`: 동물 이모지
   - `card`: {name, sub(학명 · 별명), rank(S/A/B), stats: [[라벨, 0~100] x4], skill(짧게), stamp_at: 1.6}
@@ -42,6 +42,7 @@
    tags, privacyStatus "public", publishAt 당일 14:00 KST (+09:00). 승인이 14:00 이후에 오면 publishAt 없이 바로 공개(public)로 초안을 고친 뒤 게시
 3. PushNotification으로 사용자에게 알림: "도감 No.NNN ○○ 준비 완료, 확인 후 '올려'라고 답해주세요" + SendUserFile로 영상 전달 + 초안 요약(제목/공개시각).
 4. 사용자가 이 세션에서 승인하면 `vidiq_social_post_publish`. 승인 전에는 절대 게시하지 않는다.
+5. 주의: 초안을 수정(draft_update)하면 예약 시각(scheduledFor)이 사라질 수 있다. 수정 후 결과의 scheduledFor를 꼭 확인하고, 비어 있으면 publishAt을 다시 넣는다.
 
 ## 6. 기록
 - `episodes_log.json`에 {no, animal, date, status(drafted/uploaded), youtube_url, voice: elevenlabs|edge} 추가
