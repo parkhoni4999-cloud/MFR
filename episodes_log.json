@@ -23,10 +23,10 @@
   "no": 2,
   "animal": "물곰",
   "date": "2026-11-24",
-  "status": "drafted",
+  "status": "scheduled",
   "vidiq_post_id": "19f711bf-8294-47b4-9c5c-dcd4fa631b84",
   "publish_at": "2026-11-24T14:00:00+09:00",
-  "youtube_url": null,
+  "youtube_url": "https://www.youtube.com/watch?v=z0ecyXq2CKA",
   "voice": "elevenlabs",
   "made_on": "2026-11-23 (미리 제작)"
  }
