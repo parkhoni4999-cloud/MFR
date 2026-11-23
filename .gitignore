@@ -1,0 +1,12 @@
+output/
+assets/px/
+assets/voice/*.mp3
+!assets/voice/short01_el.mp3
+pipeline/models/
+pipeline/fonts/
+voice_samples/
+*.zip
+__pycache__/
+branding/*.ttf
+branding/ai_*.png
+branding/cmp.png

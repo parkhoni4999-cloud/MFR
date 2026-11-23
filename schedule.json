@@ -1,0 +1,338 @@
+[
+ {
+  "date": "2026-11-24",
+  "weekday": "화",
+  "no": 1,
+  "animal": "문어",
+  "en": "octopus",
+  "theme": "바다"
+ },
+ {
+  "date": "2026-11-25",
+  "weekday": "수",
+  "no": 2,
+  "animal": "벌꿀오소리",
+  "en": "honey badger",
+  "theme": "맹수"
+ },
+ {
+  "date": "2026-11-26",
+  "weekday": "목",
+  "no": 3,
+  "animal": "송골매",
+  "en": "peregrine falcon",
+  "theme": "하늘"
+ },
+ {
+  "date": "2026-11-27",
+  "weekday": "금",
+  "no": 4,
+  "animal": "오리너구리",
+  "en": "platypus",
+  "theme": "기묘한 동물"
+ },
+ {
+  "date": "2026-11-28",
+  "weekday": "토",
+  "no": 5,
+  "animal": "낙타",
+  "en": "camel",
+  "theme": "극한 생존"
+ },
+ {
+  "date": "2026-11-29",
+  "weekday": "일",
+  "no": 6,
+  "animal": "고양이",
+  "en": "cat",
+  "theme": "친숙한 동물의 숨은 능력"
+ },
+ {
+  "date": "2026-11-30",
+  "weekday": "월",
+  "no": 7,
+  "animal": "갯가재",
+  "en": "mantis shrimp",
+  "theme": "바다"
+ },
+ {
+  "date": "2026-12-01",
+  "weekday": "화",
+  "no": 8,
+  "animal": "물곰",
+  "en": "tardigrade",
+  "theme": "작은 생물"
+ },
+ {
+  "date": "2026-12-02",
+  "weekday": "수",
+  "no": 9,
+  "animal": "하마",
+  "en": "hippo",
+  "theme": "맹수"
+ },
+ {
+  "date": "2026-12-03",
+  "weekday": "목",
+  "no": 10,
+  "animal": "까마귀",
+  "en": "crow",
+  "theme": "하늘"
+ },
+ {
+  "date": "2026-12-04",
+  "weekday": "금",
+  "no": 11,
+  "animal": "아홀로틀",
+  "en": "axolotl",
+  "theme": "기묘한 동물"
+ },
+ {
+  "date": "2026-12-05",
+  "weekday": "토",
+  "no": 12,
+  "animal": "황제펭귄",
+  "en": "emperor penguin",
+  "theme": "극한 생존"
+ },
+ {
+  "date": "2026-12-06",
+  "weekday": "일",
+  "no": 13,
+  "animal": "강아지",
+  "en": "dog",
+  "theme": "친숙한 동물의 숨은 능력"
+ },
+ {
+  "date": "2026-12-07",
+  "weekday": "월",
+  "no": 14,
+  "animal": "불멸 해파리",
+  "en": "jellyfish",
+  "theme": "바다"
+ },
+ {
+  "date": "2026-12-08",
+  "weekday": "화",
+  "no": 15,
+  "animal": "폭탄먼지벌레",
+  "en": "beetle",
+  "theme": "작은 생물"
+ },
+ {
+  "date": "2026-12-09",
+  "weekday": "수",
+  "no": 16,
+  "animal": "악어",
+  "en": "crocodile",
+  "theme": "맹수"
+ },
+ {
+  "date": "2026-12-10",
+  "weekday": "목",
+  "no": 17,
+  "animal": "벌새",
+  "en": "hummingbird",
+  "theme": "하늘"
+ },
+ {
+  "date": "2026-12-11",
+  "weekday": "금",
+  "no": 18,
+  "animal": "천산갑",
+  "en": "pangolin",
+  "theme": "기묘한 동물"
+ },
+ {
+  "date": "2026-12-12",
+  "weekday": "토",
+  "no": 19,
+  "animal": "북극곰",
+  "en": "polar bear",
+  "theme": "극한 생존"
+ },
+ {
+  "date": "2026-12-13",
+  "weekday": "일",
+  "no": 20,
+  "animal": "돼지",
+  "en": "pig",
+  "theme": "친숙한 동물의 숨은 능력"
+ },
+ {
+  "date": "2026-12-14",
+  "weekday": "월",
+  "no": 21,
+  "animal": "범고래",
+  "en": "orca",
+  "theme": "바다"
+ },
+ {
+  "date": "2026-12-15",
+  "weekday": "화",
+  "no": 22,
+  "animal": "개미",
+  "en": "ant",
+  "theme": "작은 생물"
+ },
+ {
+  "date": "2026-12-16",
+  "weekday": "수",
+  "no": 23,
+  "animal": "치타",
+  "en": "cheetah",
+  "theme": "맹수"
+ },
+ {
+  "date": "2026-12-17",
+  "weekday": "목",
+  "no": 24,
+  "animal": "올빼미",
+  "en": "owl",
+  "theme": "하늘"
+ },
+ {
+  "date": "2026-12-18",
+  "weekday": "금",
+  "no": 25,
+  "animal": "나무늘보",
+  "en": "sloth",
+  "theme": "기묘한 동물"
+ },
+ {
+  "date": "2026-12-19",
+  "weekday": "토",
+  "no": 26,
+  "animal": "아귀",
+  "en": "anglerfish",
+  "theme": "극한 생존"
+ },
+ {
+  "date": "2026-12-20",
+  "weekday": "일",
+  "no": 27,
+  "animal": "닭",
+  "en": "chicken",
+  "theme": "친숙한 동물의 숨은 능력"
+ },
+ {
+  "date": "2026-12-21",
+  "weekday": "월",
+  "no": 28,
+  "animal": "바다거북",
+  "en": "sea turtle",
+  "theme": "바다"
+ },
+ {
+  "date": "2026-12-22",
+  "weekday": "화",
+  "no": 29,
+  "animal": "사마귀",
+  "en": "praying mantis",
+  "theme": "작은 생물"
+ },
+ {
+  "date": "2026-12-23",
+  "weekday": "수",
+  "no": 30,
+  "animal": "코모도왕도마뱀",
+  "en": "komodo dragon",
+  "theme": "맹수"
+ },
+ {
+  "date": "2026-12-24",
+  "weekday": "목",
+  "no": 31,
+  "animal": "알바트로스",
+  "en": "albatross",
+  "theme": "하늘"
+ },
+ {
+  "date": "2026-12-25",
+  "weekday": "금",
+  "no": 32,
+  "animal": "별코두더지",
+  "en": "mole",
+  "theme": "기묘한 동물"
+ },
+ {
+  "date": "2026-12-26",
+  "weekday": "토",
+  "no": 33,
+  "animal": "캥거루쥐",
+  "en": "kangaroo rat",
+  "theme": "극한 생존"
+ },
+ {
+  "date": "2026-12-27",
+  "weekday": "일",
+  "no": 34,
+  "animal": "비둘기",
+  "en": "pigeon",
+  "theme": "친숙한 동물의 숨은 능력"
+ },
+ {
+  "date": "2026-12-28",
+  "weekday": "월",
+  "no": 35,
+  "animal": "망치상어",
+  "en": "hammerhead shark",
+  "theme": "바다"
+ },
+ {
+  "date": "2026-12-29",
+  "weekday": "화",
+  "no": 36,
+  "animal": "소금쟁이",
+  "en": "water strider",
+  "theme": "작은 생물"
+ },
+ {
+  "date": "2026-12-30",
+  "weekday": "수",
+  "no": 37,
+  "animal": "재규어",
+  "en": "jaguar",
+  "theme": "맹수"
+ },
+ {
+  "date": "2026-12-31",
+  "weekday": "목",
+  "no": 38,
+  "animal": "앵무새",
+  "en": "parrot",
+  "theme": "하늘"
+ },
+ {
+  "date": "2027-01-01",
+  "weekday": "금",
+  "no": 39,
+  "animal": "개복치",
+  "en": "sunfish",
+  "theme": "기묘한 동물"
+ },
+ {
+  "date": "2027-01-02",
+  "weekday": "토",
+  "no": 40,
+  "animal": "북극여우",
+  "en": "arctic fox",
+  "theme": "극한 생존"
+ },
+ {
+  "date": "2027-01-03",
+  "weekday": "일",
+  "no": 41,
+  "animal": "소",
+  "en": "cow",
+  "theme": "친숙한 동물의 숨은 능력"
+ },
+ {
+  "date": "2027-01-04",
+  "weekday": "월",
+  "no": 42,
+  "animal": "흰긴수염고래",
+  "en": "blue whale",
+  "theme": "바다"
+ }
+]

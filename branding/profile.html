@@ -1,0 +1,25 @@
+<html><head><style>
+@font-face{font-family:P;src:url(Pretendard-Black.ttf)}
+body{margin:0;width:800px;height:800px;background:#0d1530;display:flex;align-items:center;justify-content:center;font-family:P}
+</style></head><body>
+<svg width="800" height="800" viewBox="0 0 800 800">
+ <defs>
+  <radialGradient id="bg" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#25407e"/><stop offset="1" stop-color="#0b1228"/></radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset=".5" stop-color="#ffc21a"/><stop offset="1" stop-color="#e08a00"/></linearGradient>
+ </defs>
+ <rect width="800" height="800" fill="url(#bg)"/>
+ <!-- hexagon badge -->
+ <polygon points="400,95 655,242 655,538 400,685 145,538 145,242" fill="none" stroke="url(#gold)" stroke-width="34" stroke-linejoin="round"/>
+ <polygon points="400,150 607,270 607,510 400,630 193,510 193,270" fill="#101b3d"/>
+ <!-- paw -->
+ <g fill="#ffffff">
+  <ellipse cx="400" cy="470" rx="105" ry="88"/>
+  <ellipse cx="290" cy="360" rx="42" ry="54" transform="rotate(-20 290 360)"/>
+  <ellipse cx="362" cy="305" rx="42" ry="56" transform="rotate(-6 362 305)"/>
+  <ellipse cx="438" cy="305" rx="42" ry="56" transform="rotate(6 438 305)"/>
+  <ellipse cx="510" cy="360" rx="42" ry="54" transform="rotate(20 510 360)"/>
+ </g>
+ <!-- S rank tag -->
+ <circle cx="580" cy="590" r="98" fill="url(#gold)" stroke="#0b1228" stroke-width="14"/>
+ <text x="580" y="628" text-anchor="middle" font-family="P" font-size="120" fill="#0b1228">S</text>
+</svg></body></html>
