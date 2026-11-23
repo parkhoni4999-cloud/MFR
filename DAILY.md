@@ -1,7 +1,7 @@
 # 매일 제작 런북 (예약 작업이 새 세션에서 따라 하는 절차)
 
 채널: 사기캐 동물도감 (YouTube @사기캐동물도감1, channelId UC5QAseBqZ16d0qTXDHYLNHA)
-기준 시간대: 한국(KST). 업로드 공개 시각: 당일 19:00 KST.
+기준 시간대: 한국(KST). 업로드 공개 시각: 매일 14:00 KST (하루 1편). 제작은 오전에 자동 시작.
 
 ## 0. 준비
 1. `bash pipeline/setup.sh` (모델, 폰트, 패키지 설치)
@@ -39,7 +39,7 @@
 1. `vidiq_video_upload` localFile -> 출력된 sh 명령 실행 -> uploadId로 ready 확인
 2. `vidiq_social_post_draft_create`: YOUTUBE, platformAccountId UC5QAseBqZ16d0qTXDHYLNHA, categoryId 15,
    title "○○ [핵심 사실 한 줄] 🐙 #shorts" (100자 이내), 설명(요약+사실+해시태그+영상 출처+"음성: AI 내레이션"),
-   tags, privacyStatus "public", publishAt 당일 19:00 KST (+09:00)
+   tags, privacyStatus "public", publishAt 당일 14:00 KST (+09:00). 승인이 14:00 이후에 오면 publishAt 없이 바로 공개(public)로 초안을 고친 뒤 게시
 3. PushNotification으로 사용자에게 알림: "도감 No.NNN ○○ 준비 완료, 확인 후 '올려'라고 답해주세요" + SendUserFile로 영상 전달 + 초안 요약(제목/공개시각).
 4. 사용자가 이 세션에서 승인하면 `vidiq_social_post_publish`. 승인 전에는 절대 게시하지 않는다.
 
