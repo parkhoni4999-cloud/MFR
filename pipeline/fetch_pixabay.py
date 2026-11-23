@@ -4,7 +4,7 @@
 - --must: 태그에 이 단어가 있는 결과만 사용 (예: --must octopus). 기본은 검색어의 첫 단어.
 결과: <저장폴더>/px_<id>.mp4, <저장폴더>/credits.json(추가), <저장폴더>/sheet_<검색어>.png
 """
-import json, os, subprocess, sys, urllib.parse, urllib.request
+import json, os, subprocess, sys, urllib.error, urllib.parse, urllib.request
 
 argv = sys.argv[1:]
 must = None
@@ -18,8 +18,13 @@ if not key:
     raise SystemExit('PIXABAY_API_KEY 환경변수가 없습니다 (환경 설정에 추가 후 새 세션 필요)')
 os.makedirs(out, exist_ok=True)
 url = 'https://pixabay.com/api/videos/?' + urllib.parse.urlencode({'key': key, 'q': q, 'per_page': 50, 'safesearch': 'true', 'order': 'popular'})
-data = json.load(urllib.request.urlopen(url, timeout=30))
-hits = [h for h in data.get('hits', []) if must in h['tags'].lower() and h['duration'] >= 6]
+UA = {'User-Agent': 'Mozilla/5.0 (shorts-pipeline)'}
+try:
+    data = json.load(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30))
+except urllib.error.HTTPError as e:
+    raise SystemExit(f'Pixabay 검색 실패: HTTP {e.code}')  # URL(키 포함)은 출력하지 않음
+BAD = ('ai generated', 'cartoon', '3d', 'animation', 'fantasy', 'monster', 'food', 'cooking', 'grill')
+hits = [h for h in data.get('hits', []) if must in h['tags'].lower() and h['duration'] >= 6 and not any(b in h['tags'].lower() for b in BAD)]
 hits.sort(key=lambda h: (-(h['videos'].get('large', {}).get('width', 0) >= 1920), -h.get('likes', 0)))
 cred_path = os.path.join(out, 'credits.json')
 cred = json.load(open(cred_path)) if os.path.exists(cred_path) else []
@@ -32,7 +37,8 @@ for h in hits[:n]:
     k = f"px_{h['id']}"
     dst = os.path.join(out, k + '.mp4')
     if not os.path.exists(dst):
-        urllib.request.urlretrieve(v['url'], dst)
+        with urllib.request.urlopen(urllib.request.Request(v['url'], headers=UA), timeout=120) as r, open(dst, 'wb') as fo:
+            fo.write(r.read())
     if k not in have:
         cred.append({'key': k, 'file': f"Pixabay video {h['id']}", 'artist': h.get('user', ''), 'license': 'Pixabay Content License',
                      'page': h.get('pageURL', ''), 'tags': h['tags'], 'duration': h['duration']})

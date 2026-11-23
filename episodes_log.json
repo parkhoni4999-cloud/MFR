@@ -1,1 +1,21 @@
-[{"no": 0, "animal": "문어(시험)", "date": "2026-11-23", "status": "uploaded_private_test", "youtube_url": "https://www.youtube.com/watch?v=4CSRfsKc6Ac", "voice": "elevenlabs"}]
+[
+ {
+  "no": 0,
+  "animal": "문어(시험)",
+  "date": "2026-11-23",
+  "status": "uploaded_private_test",
+  "youtube_url": "https://www.youtube.com/watch?v=4CSRfsKc6Ac",
+  "voice": "elevenlabs"
+ },
+ {
+  "no": 1,
+  "animal": "문어",
+  "date": "2026-11-24",
+  "status": "drafted",
+  "vidiq_post_id": "07cd782a-34b5-44ca-9209-a5e9f960796a",
+  "publish_at": "2026-11-24T14:00:00+09:00",
+  "youtube_url": null,
+  "voice": "elevenlabs",
+  "made_on": "2026-11-23 (테스트 실행)"
+ }
+]
