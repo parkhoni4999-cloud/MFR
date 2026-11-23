@@ -24,3 +24,9 @@
 - 순서: vidiq_video_upload(localFile) -> 출력된 sh 명령 실행 -> vidiq_social_post_draft_create(YOUTUBE, categoryId 15) -> 사용자 승인 -> vidiq_social_post_publish
 - 업로드 비용 0 크레딧. 공개 전 반드시 사용자 승인. 1~2주차는 private.
 - 시험 업로드 완료: https://www.youtube.com/watch?v=4CSRfsKc6Ac (private, 문어 로고 버전)
+
+## 저장 위치 (GitHub)
+- 저장소: parkhoni4999-cloud/MFR 의 `youtube-shorts` 분기 (MFR 기본 분기는 건드리지 않음)
+- 복구: `git clone --branch youtube-shorts --single-branch https://github.com/parkhoni4999-cloud/mfr /home/user/youtube-shorts && bash /home/user/youtube-shorts/pipeline/setup.sh`
+- 매일 기록 후: `git push origin main:youtube-shorts`
+- 주의: MFR은 공개 저장소이므로 API 키, 비밀번호, 개인 정보는 절대 커밋하지 않는다.
