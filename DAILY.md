@@ -49,3 +49,10 @@
 ## 6. 기록
 - `episodes_log.json`에 {no, animal, date, status(drafted/uploaded), youtube_url, voice: elevenlabs|edge} 추가
 - mp4/음성/영상소재를 제외한 변경(script.json, facts.md, schedule.json, log)을 커밋하고 push.
+
+## 성과 반영 규칙 (No.001 분석, 2026-11-23: 계속 시청함 41%, 평균 조회율 56%)
+- 첫 장면(훅): 2초 안에 끝나는 짧고 충격적인 질문/사실 한 문장. 예: "심장이 3개?!" 자막은 0프레임부터 크게 표시됨(build.py가 첫 장면을 자동 처리).
+- 첫 장면에는 가장 강렬한 실사 화면(동물 얼굴 클로즈업, 움직임)을 쓴다. 우주/풍경 같은 간접 화면은 피한다.
+- 전체 길이 30~35초 목표(스킬 3개 + 반전/보너스 1개 + 카드). 소개 장면은 짧게.
+- 도감 카드: card에 "cta": "몇 등급일까요? 댓글로!", "cta_hl": "몇 등급" 넣고, 카드 내레이션 끝에 "여러분 생각엔 몇 등급일까요? 댓글로 알려주세요!"를 붙인다.
+- 영상 공개 다음 날 사용자가 스튜디오 지표를 주면 episodes_log.json에 stayed/avg_view_pct 기록.

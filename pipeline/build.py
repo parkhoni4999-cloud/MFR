@@ -97,6 +97,8 @@ for i, s in enumerate(sc):
 
 # ---------------- 3. graphics ----------------
 f_cap = ImageFont.truetype(f'{FONT}/Pretendard-Black.ttf', 100)
+f_hook = ImageFont.truetype(f'{FONT}/Pretendard-Black.ttf', 122)
+f_cta = ImageFont.truetype(f'{FONT}/Pretendard-Black.ttf', 64)
 f_title = ImageFont.truetype(f'{FONT}/Pretendard-ExtraBold.ttf', 64)
 f_tag = ImageFont.truetype(f'{FONT}/Pretendard-Bold.ttf', 38)
 f_emoji = ImageFont.truetype(EMOJI, 109)
@@ -137,18 +139,19 @@ def ease_back(t):
     return 1 + (c + 1) * (t - 1) ** 3 + c * (t - 1) ** 2
 
 CAP_CACHE = {}
-def caption_layer(s):
-    key = s['caption']
+def caption_layer(s, font=None):
+    font = font or f_cap
+    key = (s['caption'], font.size)
     if key in CAP_CACHE: return CAP_CACHE[key]
-    lines = s['caption'].split('\n'); lh = 124
+    lines = s['caption'].split('\n'); lh = int(font.size * 1.24)
     im = Image.new('RGBA', (W, lh * len(lines) + 40), (0, 0, 0, 0)); dd = ImageDraw.Draw(im)
     for i, line in enumerate(lines):
         hl = s.get('hl')
         segs = [(p, c) for p, c in ((line.split(hl, 1)[0], 0), (hl, 1), (line.split(hl, 1)[1], 0))] if hl and hl in line else [(line, 0)]
-        x = (W - sum(dd.textlength(p, font=f_cap) for p, _ in segs)) / 2
+        x = (W - sum(dd.textlength(p, font=font) for p, _ in segs)) / 2
         for p, c in segs:
-            dd.text((x, 10 + i * lh), p, font=f_cap, fill=(255, 224, 61) if c else 'white', stroke_width=11, stroke_fill=(8, 10, 22))
-            x += dd.textlength(p, font=f_cap)
+            dd.text((x, 10 + i * lh), p, font=font, fill=(255, 224, 61) if c else 'white', stroke_width=12, stroke_fill=(8, 10, 22))
+            x += dd.textlength(p, font=font)
     CAP_CACHE[key] = im
     return im
 
@@ -205,6 +208,13 @@ def draw_card(im, c, ls):
         stamp = stamp.rotate(-10, resample=Image.BICUBIC, expand=True)
         a = min(st * 2, 1); stamp.putalpha(stamp.getchannel('A').point(lambda v: int(v * a)))
         im.alpha_composite(stamp, (CX1 - 140 - stamp.width // 2, CY0 + 150 - stamp.height // 2 + off))
+    if c.get('cta'):  # 등급 도장 뒤 시청자 질문 (댓글 유도)
+        cp = (ls - c.get('stamp_at', 1.3) - 0.5) / 0.3
+        if cp > 0:
+            cl = caption_layer({'caption': c['cta'], 'hl': c.get('cta_hl')}, f_cta)
+            k2 = 0.6 + 0.4 * ease_back(cp)
+            cr = cl.resize((max(1, int(cl.width * k2)), max(1, int(cl.height * k2))), Image.BILINEAR)
+            im.alpha_composite(cr, (int((W - cr.width) / 2), int(CY1 - 340 - cr.height / 2 + off)))
     if os.path.exists(LOGO_PATH):  # 도감 박사(마스코트)가 카드 아래에서 등장
         mp = ease_back((ls - 0.6) / 0.4)
         if mp > 0:
@@ -221,18 +231,24 @@ def compose(i, bg, s):
         cw, ch = W / z, H / z
         bg = bg.resize((W, H), Image.BILINEAR, box=((W - cw) / 2, (H - ch) / 2, (W + cw) / 2, (H + ch) / 2))
     im = bg.convert('RGBA')
-    if ls < 0.12:  # flash on cut
+    hook = s is sc[0]
+    if ls < 0.12 and not hook:  # flash on cut
         im = Image.blend(im, Image.new('RGBA', (W, H), (255, 255, 255, 255)), 0.35 * (1 - ls / 0.12))
     im.alpha_composite(STATIC)
     if s.get('card'):
         im = Image.alpha_composite(im, Image.new('RGBA', (W, H), (0, 0, 0, 110)))
         im = draw_card(im, S['card'], ls)
         return im.convert('RGB')
-    cap = caption_layer(s)
-    p = ease_back(ls / 0.3)
-    sc_ = 0.6 + 0.4 * p
+    if hook:  # 첫 장면: 0프레임부터 크게, 화면 가운데에 (스와이프 방지)
+        cap = caption_layer(s, f_hook)
+        sc_ = 1.0 + 0.035 * math.sin(t * 6)
+        cy = 1450 if s.get('fit') else 1000
+    else:
+        cap = caption_layer(s)
+        sc_ = 0.6 + 0.4 * ease_back(ls / 0.3)
+        cy = 1330
     cr = cap.resize((max(1, int(cap.width * sc_)), max(1, int(cap.height * sc_))), Image.BILINEAR)
-    im.alpha_composite(cr, (int((W - cr.width) / 2), int(1330 - cr.height / 2)))
+    im.alpha_composite(cr, (int((W - cr.width) / 2), int(cy - cr.height / 2)))
     d = ImageDraw.Draw(im)
     prog = min(t / TOTAL, 1)
     d.rounded_rectangle([70, 1700, W - 70, 1720], 10, fill=(255, 255, 255, 90))
