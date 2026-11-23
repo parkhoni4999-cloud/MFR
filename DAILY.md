@@ -43,6 +43,7 @@
    tags, privacyStatus "public", publishAt 당일 14:00 KST (+09:00). 승인이 14:00 이후에 오면 publishAt 없이 바로 공개(public)로 초안을 고친 뒤 게시
 3. PushNotification으로 사용자에게 알림: "도감 No.NNN ○○ 준비 완료, 확인 후 '올려'라고 답해주세요" + SendUserFile로 영상 전달 + 초안 요약(제목/공개시각).
 4. 사용자가 이 세션에서 승인하면 `vidiq_social_post_publish`. 승인 전에는 절대 게시하지 않는다.
+6. vidIQ 무료 플랜은 유튜브 업로드가 하루 3개까지(미국 태평양시 자정 = 한국 17:00 초기화). 한도 초과 오류가 나면 17:05 KST 이후로 send_later 재시도 예약.
 5. 주의: 초안을 수정(draft_update)하면 예약 시각(scheduledFor)이 사라질 수 있다. 수정 후 결과의 scheduledFor를 꼭 확인하고, 비어 있으면 publishAt을 다시 넣는다.
 
 ## 6. 기록
