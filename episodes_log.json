@@ -11,10 +11,10 @@
   "no": 1,
   "animal": "문어",
   "date": "2026-11-24",
-  "status": "drafted",
+  "status": "scheduled",
   "vidiq_post_id": "07cd782a-34b5-44ca-9209-a5e9f960796a",
   "publish_at": "2026-11-24T14:00:00+09:00",
-  "youtube_url": null,
+  "youtube_url": "https://www.youtube.com/watch?v=CzispKotRMg",
   "voice": "elevenlabs",
   "made_on": "2026-11-23 (테스트 실행)"
  }
