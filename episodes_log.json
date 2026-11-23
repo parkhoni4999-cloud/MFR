@@ -29,5 +29,16 @@
   "youtube_url": "https://www.youtube.com/watch?v=z0ecyXq2CKA",
   "voice": "elevenlabs",
   "made_on": "2026-11-23 (미리 제작)"
+ },
+ {
+  "no": 3,
+  "animal": "벌꿀오소리",
+  "date": "2026-11-25",
+  "status": "drafted",
+  "vidiq_post_id": "de0744ab-9710-4e55-ae8c-9db4c05ec0f2",
+  "publish_at": "2026-11-25T14:00:00+09:00",
+  "youtube_url": null,
+  "voice": "elevenlabs",
+  "made_on": "2026-11-23 (미리 제작)"
  }
 ]

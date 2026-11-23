@@ -87,6 +87,10 @@ for i, s in enumerate(sc):
     vf = f"crop=ih*9/16:ih:{x0}:0,scale={W}:{H}:flags=lanczos,fps={FPS},eq=contrast=1.06:saturation=1.15"
     if s.get('tint') == 'blue':
         vf += ",colorchannelmixer=rr=0.55:gg=0.8:bb=1.25:bg=0.15"
+    if s.get('fit'):  # 가로 사진/영상 전체를 보여주고 위아래는 흐린 배경으로 채움
+        fw = int(W * s.get('fit_scale', 1.25)) // 2 * 2
+        vf = (f"split[a][b];[a]crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale={W}:{H},boxblur=30:2,eq=brightness=-0.12[bg];"
+              f"[b]scale={fw}:-2:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2-80,fps={FPS},eq=contrast=1.06:saturation=1.15")
     run('ffmpeg', '-loglevel', 'error', '-y', '-stream_loop', '-1', '-ss', str(s['ss']), '-i', src, '-t', f'{dur:.3f}',
         '-vf', vf, '-an', '-pix_fmt', 'rgb24', '-f', 'rawvideo', f'{TMP}/bg{i}.raw')
     s['bg_n'] = os.path.getsize(f'{TMP}/bg{i}.raw') // (W * H * 3)
