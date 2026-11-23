@@ -171,7 +171,10 @@ def card_base(c):
         d.rounded_rectangle([CX0 + 250, y + 10, CX1 - 150, y + 46], 18, fill=(255, 255, 255, 40)); y += 100
     sk = '고유 스킬  ' + c.get('skill', '')
     d.rounded_rectangle([CX0 + 40, CY1 - 250, CX1 - 40, CY1 - 110], 24, fill=(0, 0, 0, 150), outline=(255, 194, 26), width=3)
-    d.text((CX0 + 70, CY1 - 212), sk[:30], font=f_cstat, fill=(255, 224, 61))
+    fsz = 44
+    while fsz > 26 and d.textlength(sk, font=ImageFont.truetype(f'{FONT}/Pretendard-ExtraBold.ttf', fsz)) > (CX1 - CX0 - 140): fsz -= 2
+    fsk = ImageFont.truetype(f'{FONT}/Pretendard-ExtraBold.ttf', fsz)
+    d.text((CX0 + 70, CY1 - 180 - fsz * 0.7), sk, font=fsk, fill=(255, 224, 61))
     d.text(((W - d.textlength('※ 능력치는 재미로 보는 점수입니다', font=f_csmall)) / 2, CY1 - 80), '※ 능력치는 재미로 보는 점수입니다', font=f_csmall, fill=(200, 210, 230))
     CARD_CACHE[key] = im
     return im

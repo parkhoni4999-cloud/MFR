@@ -18,5 +18,16 @@
   "voice": "elevenlabs",
   "made_on": "2026-11-23 (테스트 실행)",
   "published": "2026-11-23 수동 공개"
+ },
+ {
+  "no": 2,
+  "animal": "물곰",
+  "date": "2026-11-24",
+  "status": "drafted",
+  "vidiq_post_id": "19f711bf-8294-47b4-9c5c-dcd4fa631b84",
+  "publish_at": "2026-11-24T14:00:00+09:00",
+  "youtube_url": null,
+  "voice": "elevenlabs",
+  "made_on": "2026-11-23 (미리 제작)"
  }
 ]
