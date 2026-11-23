@@ -24,7 +24,7 @@
 - `python3 pipeline/fetch_pixabay.py "<en 검색어>" assets/px/NNN 6 --must <핵심 영단어>`
 - 출력된 sheet 이미지를 Read로 직접 보고, 엉뚱한 영상(만화, 놀이기구 등)은 쓰지 않는다.
 - 장면마다 `clip`(px_ID), `ss`(시작초), `cx`(가로 중심 0~1)를 정한다. 같은 클립을 2번 넘게 쓰지 않도록 한다.
-- 부족하면 Wikimedia Commons(CC0, CC BY만; 원본 대신 transcoded 720p/1080p URL 사용).
+- 부족하거나 PIXABAY_API_KEY 환경변수가 이 세션에 없으면 Wikimedia Commons(CC0, CC BY만; 원본 대신 transcoded 720p/1080p URL 사용)로 대체하고 알림에 적는다.
 
 ## 3. 음성 (ElevenLabs 커넥터)
 - 먼저 `account_get_usage`로 남은 크레딧 확인. 400 미만이면 ElevenLabs 대신 edge-tts(`voice`: "ko-KR-HyunsuMultilingualNeural", `voice_file` 제거)로 만들고 알림에 적는다.
