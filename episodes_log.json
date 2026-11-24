@@ -42,5 +42,16 @@
   "voice": "elevenlabs",
   "made_on": "2026-11-23 (미리 제작)",
   "note": "자막판으로 교체 (이전 mtcE-J0nUhg 삭제)"
+ },
+ {
+  "no": 4,
+  "animal": "송골매",
+  "date": "2026-11-26",
+  "status": "drafted",
+  "vidiq_post_id": "30a4950a-db7c-4907-839c-34727aa59a55",
+  "publish_at": "2026-11-26T14:00:00+09:00",
+  "youtube_url": null,
+  "voice": "elevenlabs",
+  "made_on": "2026-11-24 (미리 제작)"
  }
 ]

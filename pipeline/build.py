@@ -103,6 +103,14 @@ if S.get('voice_file'):
             tt0 = AT[k] - 0.08 if k is not None else None
             times.append(tt0); off += len(norm(c))
         times[0] = x['start']
+        sil_ends = [b for a, b in sil]
+        for j in range(1, len(times)):  # 문장부호 뒤에서 시작하는 조각은 실제 쉼이 끝나는 시점에 맞춤
+            prev_last = chs[j - 1].split()[-1].rstrip('!?')
+            if re.search(re.escape(prev_last) + r'\s*[,.!?…]', x['text']):
+                min_t = times[j - 1] + 0.11 * len(norm(chs[j - 1]))  # 앞 조각을 말하는 데 필요한 최소 시간
+                cand = [b for b in sil_ends if min_t < b < x['end'] - 0.2]
+                if cand and (times[j] is None or abs(cand[0] - times[j]) < 1.6):
+                    times[j] = cand[0] - 0.05
         for j in range(1, len(times)):
             if times[j] is None or not (times[j - 1] < times[j] < x['end']):
                 times[j] = times[j - 1] + (x['end'] - times[j - 1]) / (len(times) - j + 1)
@@ -142,7 +150,7 @@ for i, s in enumerate(sc):
     if s.get('fit'):  # 가로 사진/영상 전체를 보여주고 위아래는 흐린 배경으로 채움
         fw = int(W * s.get('fit_scale', 1.25)) // 2 * 2
         vf = (f"split[a][b];[a]crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale={W}:{H},boxblur=30:2,eq=brightness=-0.12[bg];"
-              f"[b]scale={fw}:-2:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2-200,fps={FPS},eq=contrast=1.06:saturation=1.15")
+              f"[b]scale=w={fw}:h=900:force_original_aspect_ratio=decrease:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2-200,fps={FPS},eq=contrast=1.06:saturation=1.15")
     run('ffmpeg', '-loglevel', 'error', '-y', '-stream_loop', '-1', '-ss', str(s['ss']), '-i', src, '-t', f'{dur:.3f}',
         '-vf', vf, '-an', '-pix_fmt', 'rgb24', '-f', 'rawvideo', f'{TMP}/bg{i}.raw')
     s['bg_n'] = os.path.getsize(f'{TMP}/bg{i}.raw') // (W * H * 3)

@@ -24,7 +24,7 @@
 - `python3 pipeline/fetch_pixabay.py "<en 검색어>" assets/px/NNN 6 --must <핵심 영단어>`
 - 출력된 sheet 이미지를 Read로 직접 보고, 엉뚱한 영상(만화, 놀이기구 등)은 쓰지 않는다.
 - 장면마다 `clip`(px_ID), `ss`(시작초), `cx`(가로 중심 0~1)를 정한다. 같은 클립을 2번 넘게 쓰지 않도록 한다.
-- 가로 사진/영상에서 동물이 잘리면 장면에 "fit": true (전체 표시 + 흐린 배경). 실사 영상이 없으면 Wikimedia/Pixabay 사진을 ffmpeg로 12초 mp4로 만들어 사용. 다른 종(예: 태즈메이니아데빌, 유럽오소리)이 섞이지 않았는지 꼭 확인.
+- 가로 사진/영상에서 동물이 잘리면 장면에 "fit": true (전체 표시 + 흐린 배경). 실사 영상이 없으면 Wikimedia/Pixabay 사진을 ffmpeg로 12초 mp4로 만들어 사용. 다른 종(예: 태즈메이니아데빌, 유럽오소리, 송골매 검색에 섞인 독수리·황조롱이·말똥가리)이 섞이지 않았는지 꼭 확인. 영상이 없으면 Pixabay 사진 검색(image_type=photo)도 활용.
 - 부족하거나 PIXABAY_API_KEY 환경변수가 이 세션에 없으면 Wikimedia Commons(CC0, CC BY만; 원본 대신 transcoded 720p/1080p URL 사용)로 대체하고 알림에 적는다.
 
 ## 3. 음성 (ElevenLabs 커넥터)
