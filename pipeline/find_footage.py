@@ -24,7 +24,7 @@ a = ap.parse_args()
 os.makedirs(a.out, exist_ok=True)
 MUST = [m.strip().lower() for m in a.must.split(',') if m.strip()]
 AVOID = [m.strip().lower() for m in a.avoid.split(',') if m.strip()] + [
-    'ai generated', 'cartoon', '3d', 'animation', 'fantasy', 'monster', 'food', 'cooking', 'grill', 'star wars', 'toy', 'logo', 'sculpture', 'statue', 'carving', 'wooden', 'figurine', 'model', 'plush', 'drawing', 'illustration', 'painting']
+    'ai generated', 'cartoon', '3d', 'animation', 'fantasy', 'monster', 'food', 'cooking', 'grill', 'star wars', 'toy', 'logo', 'sculpture', 'statue', 'carving', 'wooden', 'figurine', 'model', 'plush', 'drawing', 'illustration', 'painting', 'green screen', 'chroma']
 UA_PX = {'User-Agent': 'Mozilla/5.0 (shorts-pipeline)'}
 UA_WM = {'User-Agent': 'ShortsPipelineBot/0.2 (https://github.com/parkhoni4999-cloud/mfr; non-commercial animal shorts) python-urllib'}
 WM_CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'wm_cache'); os.makedirs(WM_CACHE, exist_ok=True)
