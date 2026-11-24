@@ -26,7 +26,8 @@ MUST = [m.strip().lower() for m in a.must.split(',') if m.strip()]
 AVOID = [m.strip().lower() for m in a.avoid.split(',') if m.strip()] + [
     'ai generated', 'cartoon', '3d', 'animation', 'fantasy', 'monster', 'food', 'cooking', 'grill', 'star wars', 'toy', 'logo', 'sculpture', 'statue', 'carving', 'wooden', 'figurine', 'model', 'plush', 'drawing', 'illustration', 'painting']
 UA_PX = {'User-Agent': 'Mozilla/5.0 (shorts-pipeline)'}
-UA_WM = {'User-Agent': 'ShortsPipelineBot/0.1 (personal non-commercial video pipeline)'}
+UA_WM = {'User-Agent': 'ShortsPipelineBot/0.2 (https://github.com/parkhoni4999-cloud/mfr; non-commercial animal shorts) python-urllib'}
+WM_CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'wm_cache'); os.makedirs(WM_CACHE, exist_ok=True)
 KEY = os.environ.get('PIXABAY_API_KEY')
 cred_path = os.path.join(a.out, 'credits.json')
 cred = json.load(open(cred_path)) if os.path.exists(cred_path) else []
@@ -47,7 +48,8 @@ def get(url, headers, timeout=60, tries=4):
                 return r.read()
         except urllib.error.HTTPError as e:
             if e.code == 429 and i < tries - 1:
-                time.sleep(20 * (i + 1)); continue
+                ra = e.headers.get('Retry-After')
+                time.sleep(min(120, int(ra)) if ra and ra.isdigit() else 30 * (i + 1)); continue
             raise FetchError(f'HTTP {e.code} ({url.split("?")[0]})')  # 쿼리(키 포함)는 출력하지 않음
     return b''
 
@@ -75,9 +77,14 @@ def wm_search(q):
     url = 'https://commons.wikimedia.org/w/api.php?' + urllib.parse.urlencode({
         'action': 'query', 'format': 'json', 'generator': 'search', 'gsrsearch': q, 'gsrnamespace': 6, 'gsrlimit': 30,
         'prop': 'imageinfo', 'iiprop': 'url|size|extmetadata', 'iiextmetadatafilter': 'LicenseShortName|Artist|ImageDescription'})
+    cp = os.path.join(WM_CACHE, re.sub(r'[^a-zA-Z0-9]+', '_', q)[:80] + '.json')
+    if os.path.exists(cp) and time.time() - os.path.getmtime(cp) < 30 * 86400:
+        return json.load(open(cp)).get('query', {}).get('pages', {}).values()
     try:
-        raw = get(url, UA_WM, tries=3)
-        return json.loads(raw).get('query', {}).get('pages', {}).values()
+        raw = get(url, UA_WM, tries=4)
+        d = json.loads(raw); json.dump(d, open(cp, 'w'))
+        time.sleep(4)
+        return d.get('query', {}).get('pages', {}).values()
     except Exception as e:
         print('Wikimedia 검색 건너뜀:', e); return []
 
