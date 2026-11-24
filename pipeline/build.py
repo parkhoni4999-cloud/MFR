@@ -303,6 +303,13 @@ def draw_sub(im, s, t, y):
         if a < 1: L = L.copy(); L.putalpha(L.getchannel('A').point(lambda v: int(v * a)))
         im.alpha_composite(L, (int((W - L.width) / 2), int(y - L.height / 2)))
 
+f_label = ImageFont.truetype(f'{FONT}/Pretendard-Bold.ttf', 30)
+def label_layer(txt):
+    dd = ImageDraw.Draw(Image.new('RGBA', (1, 1))); tw = dd.textlength(txt, font=f_label)
+    im = Image.new('RGBA', (int(tw + 32), 50), (0, 0, 0, 0)); d2 = ImageDraw.Draw(im)
+    d2.rounded_rectangle([0, 0, im.width - 1, 49], 16, fill=(0, 0, 0, 150)); d2.text((16, 8), txt, font=f_label, fill=(230, 230, 230))
+    return im
+
 def compose(i, bg, s):
     t = i / FPS
     ls = t - s['start']; dur = s['bg_n'] / FPS
@@ -320,6 +327,8 @@ def compose(i, bg, s):
         im = draw_card(im, S['card'], ls)
         draw_sub(im, s, t, SUB_Y_CARD)
         return im.convert('RGB')
+    if s.get('label'):  # 예: '연출 이미지' (실제 사진이 아닌 소재 표시)
+        lb = label_layer(s['label']); im.alpha_composite(lb, (W - 70 - lb.width, 336))
     if hook:  # 첫 장면: 0프레임부터 크게, 화면 가운데에 (스와이프 방지)
         cap = caption_layer(s, f_hook)
         sc_ = 1.0 + 0.035 * math.sin(t * 6)

@@ -53,5 +53,16 @@
   "youtube_url": null,
   "voice": "elevenlabs",
   "made_on": "2026-11-24 (미리 제작)"
+ },
+ {
+  "no": 5,
+  "animal": "오리너구리",
+  "date": "2026-11-27",
+  "status": "drafted",
+  "vidiq_post_id": "5a76dbe9-95b5-4c05-8a33-630e24c7b678",
+  "publish_at": "2026-11-27T14:00:00+09:00",
+  "youtube_url": null,
+  "voice": "elevenlabs",
+  "made_on": "2026-11-24 (미리 제작)"
  }
 ]
