@@ -1,7 +1,7 @@
 """쇼츠 1편 빌드: script_<id>.json -> 음성(edge-tts) -> 실사 배경(Wikimedia 클립) -> 자막/그래픽 합성 -> mp4 + 업로드용 설명문.
 사용법: python3 build.py script_short01.json <clips_dir> <out_dir>
 """
-import asyncio, json, math, os, subprocess, sys, wave
+import asyncio, json, math, os, re, subprocess, sys, wave
 import numpy as np
 import edge_tts
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -18,6 +18,37 @@ TMP = os.path.join(OUT, 'tmp'); os.makedirs(TMP, exist_ok=True)
 
 def run(*a):
     subprocess.run(a, check=True)
+
+
+def chunk_text(text, maxlen=15):
+    """대본을 읽기 좋은 한 줄 자막 조각으로 나눈다: 문장부호에서 끊고, 긴 구절은 띄어쓰기 기준으로 균등하게 나눔."""
+    t = re.sub(r'\s+', ' ', re.sub(r'\.\.\.|…', ' ', text))
+    parts = [p.strip().rstrip('.,').strip() for p in re.split(r'(?<=[.!?,])\s+', t) if p.strip()]
+    out = []
+    for p in parts:
+        words = p.split()
+        n = max(1, math.ceil(len(p) / maxlen))
+        if n == 1:
+            out.append(p); continue
+        target = len(p) / n; cur = ''; acc = []
+        for w in words:
+            cand = (cur + ' ' + w).strip()
+            if cur and len(acc) < n - 1 and abs(len(cand) - target) > abs(len(cur) - target):
+                acc.append(cur); cur = w
+            else:
+                cur = cand
+        acc.append(cur); out += acc
+    merged, carry = [], ''  # 2글자 이하 조각("바로" 등)은 다음 조각 앞에 붙임
+    for c in out:
+        c = (carry + ' ' + c).strip() if carry else c; carry = ''
+        if len(c.replace(' ', '')) <= 2:
+            carry = c
+        else:
+            merged.append(c)
+    if carry:
+        if merged: merged[-1] += ' ' + carry
+        else: merged.append(carry)
+    return merged
 
 # ---------------- 1. voice ----------------
 async def tts():
@@ -62,6 +93,20 @@ if S.get('voice_file'):
     for i, x in enumerate(sc):
         x['start'], x['end'] = cuts[i], cuts[i + 1]
     print('cuts', [round(c, 2) for c in cuts], 'silences', [round(m, 2) for m in mids])
+    for si, x in enumerate(sc):  # 대본 자막 조각별 시작 시각 (글자 타임스탬프 사용)
+        if x.get('sub'):
+            continue
+        chs = chunk_text(x['text']); off = 0; times = []
+        for c in chs:
+            gi = starts[si] + off
+            k = next((mp[q] for q in range(gi, min(gi + 12, len(T))) if q in mp), None)
+            tt0 = AT[k] - 0.08 if k is not None else None
+            times.append(tt0); off += len(norm(c))
+        times[0] = x['start']
+        for j in range(1, len(times)):
+            if times[j] is None or not (times[j - 1] < times[j] < x['end']):
+                times[j] = times[j - 1] + (x['end'] - times[j - 1]) / (len(times) - j + 1)
+        x['subs'] = [(times[j], times[j + 1] if j + 1 < len(times) else x['end'] + 0.15, chs[j]) for j in range(len(chs))]
     parts, t = [vall], dur_all
 else:
     asyncio.run(tts())
@@ -71,6 +116,13 @@ else:
         x = np.fromfile(f'{TMP}/v{i}.raw', np.int16).astype(np.float32) / 32768
         s['start'] = t; t += len(x) / SR; s['end'] = t; t += GAP
         parts += [x, np.zeros(int(SR * GAP), np.float32)]
+for x in sc:
+    if 'subs' not in x:
+        chs = chunk_text(x.get('sub') or x['text'])
+        w = [max(1, len(re.sub(r'\s', '', c))) for c in chs]; tot = sum(w); acc = x['start']; x['subs'] = []
+        for c, wi in zip(chs, w):
+            d_ = (x['end'] - x['start']) * wi / tot
+            x['subs'].append((acc, acc + d_ + (0.15 if c is chs[-1] else 0), c)); acc += d_
 voice = np.concatenate(parts)
 TOTAL = t + 0.8
 N = int(TOTAL * FPS)
@@ -90,7 +142,7 @@ for i, s in enumerate(sc):
     if s.get('fit'):  # 가로 사진/영상 전체를 보여주고 위아래는 흐린 배경으로 채움
         fw = int(W * s.get('fit_scale', 1.25)) // 2 * 2
         vf = (f"split[a][b];[a]crop=ih*9/16:ih:(iw-ih*9/16)/2:0,scale={W}:{H},boxblur=30:2,eq=brightness=-0.12[bg];"
-              f"[b]scale={fw}:-2:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2-80,fps={FPS},eq=contrast=1.06:saturation=1.15")
+              f"[b]scale={fw}:-2:flags=lanczos[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2-200,fps={FPS},eq=contrast=1.06:saturation=1.15")
     run('ffmpeg', '-loglevel', 'error', '-y', '-stream_loop', '-1', '-ss', str(s['ss']), '-i', src, '-t', f'{dur:.3f}',
         '-vf', vf, '-an', '-pix_fmt', 'rgb24', '-f', 'rawvideo', f'{TMP}/bg{i}.raw')
     s['bg_n'] = os.path.getsize(f'{TMP}/bg{i}.raw') // (W * H * 3)
@@ -223,6 +275,26 @@ def draw_card(im, c, ls):
             im.alpha_composite(m, (CX0 - 30, CY1 - 120 + int((1 - mp) * 300)))
     return im
 
+f_sub = ImageFont.truetype(f'{FONT}/Pretendard-Bold.ttf', 54)
+SUB_CACHE = {}
+SUB_Y, SUB_Y_CARD = 1470, 1645  # 대본 자막 세로 위치(중앙)
+def sub_layer(txt):
+    if txt in SUB_CACHE: return SUB_CACHE[txt]
+    dd = ImageDraw.Draw(Image.new('RGBA', (1, 1)))
+    tw = dd.textlength(txt, font=f_sub); pw, ph = int(tw + 60), 88
+    im = Image.new('RGBA', (pw, ph), (0, 0, 0, 0)); d2 = ImageDraw.Draw(im)
+    d2.rounded_rectangle([0, 0, pw - 1, ph - 1], 28, fill=(8, 10, 22, 185))
+    d2.text((30, 13), txt, font=f_sub, fill=(255, 255, 255), stroke_width=3, stroke_fill=(8, 10, 22))
+    SUB_CACHE[txt] = im
+    return im
+
+def draw_sub(im, s, t, y):
+    cur = next((c for c in s.get('subs', []) if c[0] <= t < c[1]), None)
+    if cur:
+        L = sub_layer(cur[2]); a = min(1, (t - cur[0]) / 0.08)
+        if a < 1: L = L.copy(); L.putalpha(L.getchannel('A').point(lambda v: int(v * a)))
+        im.alpha_composite(L, (int((W - L.width) / 2), int(y - L.height / 2)))
+
 def compose(i, bg, s):
     t = i / FPS
     ls = t - s['start']; dur = s['bg_n'] / FPS
@@ -238,17 +310,19 @@ def compose(i, bg, s):
     if s.get('card'):
         im = Image.alpha_composite(im, Image.new('RGBA', (W, H), (0, 0, 0, 110)))
         im = draw_card(im, S['card'], ls)
+        draw_sub(im, s, t, SUB_Y_CARD)
         return im.convert('RGB')
     if hook:  # 첫 장면: 0프레임부터 크게, 화면 가운데에 (스와이프 방지)
         cap = caption_layer(s, f_hook)
         sc_ = 1.0 + 0.035 * math.sin(t * 6)
-        cy = 1450 if s.get('fit') else 1000
+        cy = 1250 if s.get('fit') else 1000
     else:
         cap = caption_layer(s)
         sc_ = 0.6 + 0.4 * ease_back(ls / 0.3)
-        cy = 1330
+        cy = 1220
     cr = cap.resize((max(1, int(cap.width * sc_)), max(1, int(cap.height * sc_))), Image.BILINEAR)
     im.alpha_composite(cr, (int((W - cr.width) / 2), int(cy - cr.height / 2)))
+    draw_sub(im, s, t, SUB_Y)
     d = ImageDraw.Draw(im)
     prog = min(t / TOTAL, 1)
     d.rounded_rectangle([70, 1700, W - 70, 1720], 10, fill=(255, 255, 255, 90))
