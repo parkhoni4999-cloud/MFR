@@ -3,7 +3,7 @@
   "no": 0,
   "animal": "문어(시험)",
   "date": "2026-11-23",
-  "status": "uploaded_private_test",
+  "status": "deleted",
   "youtube_url": "https://www.youtube.com/watch?v=4CSRfsKc6Ac",
   "voice": "elevenlabs"
  },
@@ -23,22 +23,24 @@
   "no": 2,
   "animal": "물곰",
   "date": "2026-11-24",
-  "status": "scheduled",
-  "vidiq_post_id": "19f711bf-8294-47b4-9c5c-dcd4fa631b84",
+  "status": "drafted",
+  "vidiq_post_id": "9db0c137-7385-46c6-823c-4844dea7d599",
   "publish_at": "2026-11-24T14:00:00+09:00",
-  "youtube_url": "https://www.youtube.com/watch?v=z0ecyXq2CKA",
+  "youtube_url": null,
   "voice": "elevenlabs",
-  "made_on": "2026-11-23 (미리 제작)"
+  "made_on": "2026-11-23 (미리 제작)",
+  "note": "자막판으로 교체 (이전 z0ecyXq2CKA 삭제)"
  },
  {
   "no": 3,
   "animal": "벌꿀오소리",
   "date": "2026-11-25",
-  "status": "scheduled",
-  "vidiq_post_id": "de0744ab-9710-4e55-ae8c-9db4c05ec0f2",
+  "status": "drafted",
+  "vidiq_post_id": "0126157f-7207-4e63-a12f-10782f11ab89",
   "publish_at": "2026-11-25T14:00:00+09:00",
-  "youtube_url": "https://www.youtube.com/watch?v=mtcE-J0nUhg",
+  "youtube_url": null,
   "voice": "elevenlabs",
-  "made_on": "2026-11-23 (미리 제작)"
+  "made_on": "2026-11-23 (미리 제작)",
+  "note": "자막판으로 교체 (이전 mtcE-J0nUhg 삭제)"
  }
 ]
