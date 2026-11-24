@@ -49,7 +49,7 @@ def get(url, headers, timeout=60, tries=4):
         except urllib.error.HTTPError as e:
             if e.code == 429 and i < tries - 1:
                 ra = e.headers.get('Retry-After')
-                time.sleep(min(120, int(ra)) if ra and ra.isdigit() else 30 * (i + 1)); continue
+                time.sleep(min(45, int(ra)) if ra and ra.isdigit() else 15 * (i + 1)); continue
             raise FetchError(f'HTTP {e.code} ({url.split("?")[0]})')  # 쿼리(키 포함)는 출력하지 않음
     return b''
 
@@ -62,7 +62,8 @@ if KEY:
         for h in d.get('hits', []):
             if h['id'] in seen or not ok_text(h['tags']) or h['duration'] < 5: continue
             seen.add(h['id'])
-            v = h['videos'].get('large') if h['videos'].get('large', {}).get('url') else h['videos'].get('medium')
+            L_, M_ = h['videos'].get('large', {}), h['videos'].get('medium', {})
+            v = L_ if L_.get('url') and L_.get('width', 0) <= 1920 else (M_ if M_.get('url') else L_)
             k = f"px_{h['id']}"; dst = os.path.join(a.out, k + '.mp4')
             if not os.path.exists(dst): open(dst, 'wb').write(get(v['url'], UA_PX, 180))
             if k not in have:
@@ -71,6 +72,7 @@ if KEY:
             if len([f for f in found if f['kind'] == 'video']) >= a.max: break
 else:
     print('PIXABAY_API_KEY 없음: Pixabay 건너뜀')
+print(f"Pixabay 영상 {len(found)}개", flush=True)
 
 # ---- 2) Wikimedia Commons videos ----
 def wm_search(q):
@@ -93,13 +95,17 @@ def lic_ok(L):
     return ('CC0' in L or 'PUBLIC DOMAIN' in L or L.startswith('CC BY')) and not any(x in L for x in ('SA', 'NC', 'ND'))
 
 wm_seen = set()
+WM_DEADLINE = time.time() + 240  # Wikimedia 단계는 최대 4분
+print('Wikimedia 검색...', flush=True)
 for q in [f'{a.sci} filetype:video' if a.sci else None, f'{a.en} filetype:video']:
-    if not q: continue
+    if not q or time.time() > WM_DEADLINE: continue
     for p in wm_search(q):
+        if time.time() > WM_DEADLINE:
+            print('Wikimedia 시간 초과로 중단', flush=True); break
         i = p['imageinfo'][0]; m = i.get('extmetadata', {}); L = m.get('LicenseShortName', {}).get('value', '')
         title = p['title'][5:]; desc = re.sub('<[^>]+>', '', m.get('ImageDescription', {}).get('value', ''))
         if p['pageid'] in wm_seen or not lic_ok(L) or not ok_text(title + ' ' + desc): continue
-        if i.get('duration', 0) < 4 or i.get('width', 0) < 640: continue
+        if i.get('duration', 0) < 4 or i.get('duration', 0) > 600 or i.get('width', 0) < 640: continue
         wm_seen.add(p['pageid'])
         name = i['url'].rsplit('/', 1)[1]; path = i['url'].split('/wikipedia/commons/')[1]
         k = f"wm_{p['pageid']}"; dst = os.path.join(a.out, k + '.webm')
@@ -145,7 +151,7 @@ for f in found:
     dur, w, h = probe(f['path']); f.update(duration=round(dur, 1), w=w, h=h, portrait=h > w)
     if f['kind'] == 'photo':
         f.update(motion=0.0, best_ss=0); continue
-    raw = subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', f['path'], '-vf', 'fps=2,scale=96:54,format=gray', '-f', 'rawvideo', '-'], capture_output=True).stdout
+    raw = subprocess.run(['ffmpeg', '-loglevel', 'error', '-t', '120', '-i', f['path'], '-vf', 'fps=2,scale=96:54,format=gray', '-f', 'rawvideo', '-'], capture_output=True).stdout
     fr = np.frombuffer(raw, np.uint8).reshape(-1, 54, 96).astype(np.float32) if raw else np.zeros((1, 54, 96))
     diff = np.abs(np.diff(fr, axis=0)).mean(axis=(1, 2)) if len(fr) > 1 else np.zeros(1)
     win = 8  # 4초 창
