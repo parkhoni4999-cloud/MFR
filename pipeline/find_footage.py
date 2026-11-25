@@ -36,7 +36,8 @@ found = []
 
 def ok_text(t):
     t = t.lower()
-    return any(m in t for m in MUST) and not any(b in t for b in AVOID)
+    has = any(re.search(r'(?<![a-z])' + re.escape(m) + r's?(?![a-z])', t) for m in MUST)  # 단어 단위 일치 (location 속 cat 방지)
+    return has and not any(b in t for b in AVOID)
 
 class FetchError(Exception):
     pass

@@ -75,5 +75,16 @@
   "youtube_url": "https://www.youtube.com/watch?v=duBUVrrzauo",
   "voice": "elevenlabs",
   "made_on": "2026-11-25 (미리 제작)"
+ },
+ {
+  "no": 7,
+  "animal": "고양이",
+  "date": "2026-11-29",
+  "status": "drafted",
+  "vidiq_post_id": "9680cdc5-330d-48a5-8a92-cd903450f39e",
+  "publish_at": "2026-11-29T14:00:00+09:00",
+  "youtube_url": null,
+  "voice": "elevenlabs",
+  "made_on": "2026-11-25 (미리 제작)"
  }
 ]
