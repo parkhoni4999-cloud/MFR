@@ -70,3 +70,5 @@
 - Wikimedia는 이 서버에서 자주 요청 제한(429)이 걸린다. 건너뛰어도 제작은 계속한다.
 
 - AI 생성으로 보이는 사진(태그에 표시가 없어도 조명·구도가 비현실적이거나 야생에서 찍기 불가능한 장면)은 가급적 쓰지 않고, 꼭 써야 하면 장면에 "label": "연출 이미지"를 넣고 설명란에 고지한다.
+
+- Pixabay에 실사가 없으면 Wikimedia 사진도 검색한다(filetype:bitmap, CC0/PD/CC BY만). iNaturalist 관찰 사진(CC BY 4.0)이 많다. 다운로드는 upload.wikimedia.org 썸네일 주소로, 8초 이상 간격을 두고, JPEG 시작 바이트(FF D8)를 파이썬으로 확인한다.

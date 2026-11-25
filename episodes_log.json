@@ -86,5 +86,16 @@
   "youtube_url": null,
   "voice": "elevenlabs",
   "made_on": "2026-11-25 (미리 제작)"
+ },
+ {
+  "no": 8,
+  "animal": "갯가재",
+  "date": "2026-11-30",
+  "status": "drafted",
+  "vidiq_post_id": "6ade639c-0272-47ea-803f-a77df5fa4249",
+  "publish_at": "2026-11-30T14:00:00+09:00",
+  "youtube_url": null,
+  "voice": "elevenlabs",
+  "made_on": "2026-11-25 (미리 제작)"
  }
 ]
