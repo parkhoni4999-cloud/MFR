@@ -1,101 +1,101 @@
 [
- {
-  "no": 0,
-  "animal": "문어(시험)",
-  "date": "2026-11-23",
-  "status": "deleted",
-  "youtube_url": "https://www.youtube.com/watch?v=4CSRfsKc6Ac",
-  "voice": "elevenlabs"
- },
- {
-  "no": 1,
-  "animal": "문어",
-  "date": "2026-11-23",
-  "status": "uploaded",
-  "vidiq_post_id": "07cd782a-34b5-44ca-9209-a5e9f960796a",
-  "publish_at": "2026-11-24T14:00:00+09:00",
-  "youtube_url": "https://www.youtube.com/watch?v=CzispKotRMg",
-  "voice": "elevenlabs",
-  "made_on": "2026-11-23 (테스트 실행)",
-  "published": "2026-11-23 수동 공개"
- },
- {
-  "no": 2,
-  "animal": "물곰",
-  "date": "2026-11-24",
-  "status": "uploaded",
-  "vidiq_post_id": "9db0c137-7385-46c6-823c-4844dea7d599",
-  "publish_at": "2026-11-24T14:00:00+09:00",
-  "youtube_url": "https://www.youtube.com/watch?v=djB4tmY_Vrk",
-  "voice": "elevenlabs",
-  "made_on": "2026-11-23 (미리 제작)",
-  "note": "자막판으로 교체 (이전 z0ecyXq2CKA 삭제)"
- },
- {
-  "no": 3,
-  "animal": "벌꿀오소리",
-  "date": "2026-11-25",
-  "status": "uploaded",
-  "vidiq_post_id": "0126157f-7207-4e63-a12f-10782f11ab89",
-  "publish_at": "2026-11-25T14:00:00+09:00",
-  "youtube_url": "https://www.youtube.com/watch?v=IOcOC4PLz7A",
-  "voice": "elevenlabs",
-  "made_on": "2026-11-23 (미리 제작)",
-  "note": "자막판으로 교체 (이전 mtcE-J0nUhg 삭제)"
- },
- {
-  "no": 4,
-  "animal": "송골매",
-  "date": "2026-11-26",
-  "status": "scheduled",
-  "vidiq_post_id": "30a4950a-db7c-4907-839c-34727aa59a55",
-  "publish_at": "2026-11-26T14:00:00+09:00",
-  "youtube_url": "https://www.youtube.com/watch?v=-ezHGd4Ro7w",
-  "voice": "elevenlabs",
-  "made_on": "2026-11-24 (미리 제작)"
- },
- {
-  "no": 5,
-  "animal": "오리너구리",
-  "date": "2026-11-27",
-  "status": "scheduled",
-  "vidiq_post_id": "5a76dbe9-95b5-4c05-8a33-630e24c7b678",
-  "publish_at": "2026-11-27T14:00:00+09:00",
-  "youtube_url": "https://www.youtube.com/watch?v=w7ahhRMhkUo",
-  "voice": "elevenlabs",
-  "made_on": "2026-11-24 (미리 제작)"
- },
- {
-  "no": 6,
-  "animal": "낙타",
-  "date": "2026-11-28",
-  "status": "scheduled",
-  "vidiq_post_id": "e3287c36-43f0-4bf1-98e3-2e08c6ad07f9",
-  "publish_at": "2026-11-28T14:00:00+09:00",
-  "youtube_url": "https://www.youtube.com/watch?v=duBUVrrzauo",
-  "voice": "elevenlabs",
-  "made_on": "2026-11-25 (미리 제작)"
- },
- {
-  "no": 7,
-  "animal": "고양이",
-  "date": "2026-11-29",
-  "status": "drafted",
-  "vidiq_post_id": "9680cdc5-330d-48a5-8a92-cd903450f39e",
-  "publish_at": "2026-11-29T14:00:00+09:00",
-  "youtube_url": null,
-  "voice": "elevenlabs",
-  "made_on": "2026-11-25 (미리 제작)"
- },
- {
-  "no": 8,
-  "animal": "갯가재",
-  "date": "2026-11-30",
-  "status": "drafted",
-  "vidiq_post_id": "6ade639c-0272-47ea-803f-a77df5fa4249",
-  "publish_at": "2026-11-30T14:00:00+09:00",
-  "youtube_url": null,
-  "voice": "elevenlabs",
-  "made_on": "2026-11-25 (미리 제작)"
- }
+  {
+    "no": 0,
+    "animal": "문어(시험)",
+    "date": "2026-11-23",
+    "status": "deleted",
+    "youtube_url": "https://www.youtube.com/watch?v=4CSRfsKc6Ac",
+    "voice": "elevenlabs"
+  },
+  {
+    "no": 1,
+    "animal": "문어",
+    "date": "2026-11-23",
+    "status": "uploaded",
+    "vidiq_post_id": "07cd782a-34b5-44ca-9209-a5e9f960796a",
+    "publish_at": "2026-11-24T14:00:00+09:00",
+    "youtube_url": "https://www.youtube.com/watch?v=CzispKotRMg",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-23 (테스트 실행)",
+    "published": "2026-11-23 수동 공개"
+  },
+  {
+    "no": 2,
+    "animal": "물곰",
+    "date": "2026-11-24",
+    "status": "uploaded",
+    "vidiq_post_id": "9db0c137-7385-46c6-823c-4844dea7d599",
+    "publish_at": "2026-11-24T14:00:00+09:00",
+    "youtube_url": "https://www.youtube.com/watch?v=djB4tmY_Vrk",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-23 (미리 제작)",
+    "note": "자막판으로 교체 (이전 z0ecyXq2CKA 삭제)"
+  },
+  {
+    "no": 3,
+    "animal": "벌꿀오소리",
+    "date": "2026-11-25",
+    "status": "uploaded",
+    "vidiq_post_id": "0126157f-7207-4e63-a12f-10782f11ab89",
+    "publish_at": "2026-11-25T14:00:00+09:00",
+    "youtube_url": "https://www.youtube.com/watch?v=IOcOC4PLz7A",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-23 (미리 제작)",
+    "note": "자막판으로 교체 (이전 mtcE-J0nUhg 삭제)"
+  },
+  {
+    "no": 4,
+    "animal": "송골매",
+    "date": "2026-11-26",
+    "status": "scheduled",
+    "vidiq_post_id": "30a4950a-db7c-4907-839c-34727aa59a55",
+    "publish_at": "2026-11-26T14:00:00+09:00",
+    "youtube_url": "https://www.youtube.com/watch?v=-ezHGd4Ro7w",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-24 (미리 제작)"
+  },
+  {
+    "no": 5,
+    "animal": "오리너구리",
+    "date": "2026-11-27",
+    "status": "scheduled",
+    "vidiq_post_id": "5a76dbe9-95b5-4c05-8a33-630e24c7b678",
+    "publish_at": "2026-11-27T14:00:00+09:00",
+    "youtube_url": "https://www.youtube.com/watch?v=w7ahhRMhkUo",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-24 (미리 제작)"
+  },
+  {
+    "no": 6,
+    "animal": "낙타",
+    "date": "2026-11-28",
+    "status": "scheduled",
+    "vidiq_post_id": "e3287c36-43f0-4bf1-98e3-2e08c6ad07f9",
+    "publish_at": "2026-11-28T14:00:00+09:00",
+    "youtube_url": "https://www.youtube.com/watch?v=duBUVrrzauo",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-25 (미리 제작)"
+  },
+  {
+    "no": 7,
+    "animal": "고양이",
+    "date": "2026-11-29",
+    "status": "scheduled",
+    "vidiq_post_id": "9680cdc5-330d-48a5-8a92-cd903450f39e",
+    "publish_at": "2026-11-29T14:00+09:00",
+    "youtube_url": "https://www.youtube.com/watch?v=8b8kXxAxtwY",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-25 (미리 제작)"
+  },
+  {
+    "no": 8,
+    "animal": "갯가재",
+    "date": "2026-11-30",
+    "status": "drafted",
+    "vidiq_post_id": "6ade639c-0272-47ea-803f-a77df5fa4249",
+    "publish_at": "2026-11-30T14:00:00+09:00",
+    "youtube_url": null,
+    "voice": "elevenlabs",
+    "made_on": "2026-11-25 (미리 제작)"
+  }
 ]
