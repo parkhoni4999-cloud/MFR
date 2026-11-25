@@ -103,14 +103,20 @@ if S.get('voice_file'):
             tt0 = AT[k] - 0.08 if k is not None else None
             times.append(tt0); off += len(norm(c))
         times[0] = x['start']
-        sil_ends = [b for a, b in sil]
-        for j in range(1, len(times)):  # 문장부호 뒤에서 시작하는 조각은 실제 쉼이 끝나는 시점에 맞춤
+        sil_ends = [b_ for a_, b_ in sil]
+        lens_ = [len(norm(c)) for c in chs]; rate = (x['end'] - x['start']) / max(1, sum(lens_))
+        for j in range(1, len(times)):
+            exp_t = x['start'] + rate * sum(lens_[:j])  # 말하는 속도로 예상한 시작 시각
+            asr_t = times[j]
             prev_last = chs[j - 1].split()[-1].rstrip('!?')
-            if re.search(re.escape(prev_last) + r'\s*[,.!?…]', x['text']):
-                min_t = times[j - 1] + 0.11 * len(norm(chs[j - 1]))  # 앞 조각을 말하는 데 필요한 최소 시간
-                cand = [b for b in sil_ends if min_t < b < x['end'] - 0.2]
-                if cand and (times[j] is None or abs(cand[0] - times[j]) < 1.6):
-                    times[j] = cand[0] - 0.05
+            phrase_start = bool(re.search(re.escape(prev_last) + r'\s*[,.!?…]', x['text']))
+            min_t = times[j - 1] + 0.09 * lens_[j - 1]
+            if phrase_start:  # 문장부호 뒤: 예상 시각 근처(±0.8초)의 실제 쉼에 맞춤
+                cand = [b_ for b_ in sil_ends if min_t < b_ < x['end'] - 0.2 and abs(b_ - exp_t) <= 0.8]
+                if cand:
+                    times[j] = min(cand, key=lambda b_: abs(b_ - exp_t)) - 0.05; continue
+            # 쉼이 없으면 음성인식 시각, 단 예상과 0.9초 넘게 다르면 예상 시각 사용
+            times[j] = asr_t if (asr_t is not None and abs(asr_t - exp_t) <= 0.9 and asr_t > min_t) else max(exp_t, min_t)
         for j in range(1, len(times)):
             if times[j] is None or not (times[j - 1] < times[j] < x['end']):
                 times[j] = times[j - 1] + (x['end'] - times[j - 1]) / (len(times) - j + 1)
