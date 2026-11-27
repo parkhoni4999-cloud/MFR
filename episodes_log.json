@@ -110,5 +110,18 @@
     "made_on": "2026-11-27 (미리 제작)",
     "experiments": "B 첫장면 헤더 제거, C 궁금증형 제목, D 다음 동물 질문, 지명도 하 위주 사실, 34.8초",
     "youtube_url": "https://www.youtube.com/watch?v=IQK3rkWCUbw"
+  },
+  {
+    "no": 10,
+    "animal": "까마귀",
+    "date": "2026-12-02",
+    "status": "drafted",
+    "vidiq_post_id": "1701023a-71ed-487e-83d0-86df19c0755c",
+    "revision": "492ae7d8",
+    "publish_at": "2026-12-02T14:00+09:00",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-27 (미리 제작)",
+    "concept": "친숙한 동물의 반전",
+    "length_s": 28.9
   }
 ]
