@@ -117,11 +117,12 @@
     "date": "2026-12-02",
     "status": "drafted",
     "vidiq_post_id": "1701023a-71ed-487e-83d0-86df19c0755c",
-    "revision": "492ae7d8",
+    "revision": "ebc18ffc",
     "publish_at": "2026-12-02T14:00+09:00",
     "voice": "elevenlabs",
     "made_on": "2026-11-27 (미리 제작)",
     "concept": "친숙한 동물의 반전",
-    "length_s": 28.9
+    "length_s": 43.1,
+    "note": "v2: 아니, 까마귀가 / 원래 구성 복귀 / 배속 없음"
   }
 ]
