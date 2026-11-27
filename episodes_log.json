@@ -103,13 +103,15 @@
     "animal": "폭탄먼지벌레",
     "date": "2026-12-01",
     "status": "scheduled",
-    "vidiq_post_id": "5b449595-7c30-470a-a75c-319af7667080",
-    "revision": "a66da127",
+    "vidiq_post_id": "f340ff02-e862-4bc9-a89c-91937f452820",
+    "revision": "49a619c9",
     "publish_at": "2026-12-01T14:00+09:00",
     "voice": "elevenlabs",
     "made_on": "2026-11-27 (미리 제작)",
     "experiments": "B 첫장면 헤더 제거, C 궁금증형 제목, D 다음 동물 질문, 지명도 하 위주 사실, 34.8초",
-    "youtube_url": "https://www.youtube.com/watch?v=IQK3rkWCUbw"
+    "youtube_url": "https://www.youtube.com/watch?v=iVVrHYwrX44",
+    "length_s": 46.8,
+    "note": "v2 원래 구성(배속 없음). 옛 예약 IQK3rkWCUbw는 vidIQ로 취소 불가 -> 사용자가 스튜디오에서 삭제 필요"
   },
   {
     "no": 10,
