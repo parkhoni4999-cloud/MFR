@@ -97,5 +97,17 @@
     "youtube_url": "https://www.youtube.com/watch?v=TW-8JqHgQf8",
     "voice": "elevenlabs",
     "made_on": "2026-11-25 (미리 제작)"
+  },
+  {
+    "no": 9,
+    "animal": "폭탄먼지벌레",
+    "date": "2026-12-01",
+    "status": "drafted",
+    "vidiq_post_id": "5b449595-7c30-470a-a75c-319af7667080",
+    "revision": "a66da127",
+    "publish_at": "2026-12-01T14:00+09:00",
+    "voice": "elevenlabs",
+    "made_on": "2026-11-27 (미리 제작)",
+    "experiments": "B 첫장면 헤더 제거, C 궁금증형 제목, D 다음 동물 질문, 지명도 하 위주 사실, 34.8초"
   }
 ]
