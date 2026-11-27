@@ -115,7 +115,7 @@
     "no": 10,
     "animal": "까마귀",
     "date": "2026-12-02",
-    "status": "drafted",
+    "status": "scheduled",
     "vidiq_post_id": "1701023a-71ed-487e-83d0-86df19c0755c",
     "revision": "ebc18ffc",
     "publish_at": "2026-12-02T14:00+09:00",
@@ -123,6 +123,7 @@
     "made_on": "2026-11-27 (미리 제작)",
     "concept": "친숙한 동물의 반전",
     "length_s": 43.1,
-    "note": "v2: 아니, 까마귀가 / 원래 구성 복귀 / 배속 없음"
+    "note": "v2: 아니, 까마귀가 / 원래 구성 복귀 / 배속 없음",
+    "youtube_url": "https://www.youtube.com/watch?v=fsJ01x6mA6A"
   }
 ]
