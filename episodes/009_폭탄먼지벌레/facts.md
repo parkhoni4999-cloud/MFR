@@ -11,3 +11,14 @@
   - https://www.nationalgeographic.com/animals/article/beetle-survives-toad-vomit-animals
   - https://www.livescience.com/61710-toads-vomit-toxic-beetles.html
 - P. jessoensis는 한국·일본·중국 등 동아시아에 분포 (한국명 폭탄먼지벌레)
+
+## 2026-11-27 재구성 (지명도 등급)
+| 사실 | 지명도 | 출처 |
+|---|---|---|
+| 약 100℃ 화학 분사 | 상 | Wikipedia, NatGeo |
+| 초당 수백 번 맥동 분사 | 중 | Arndt et al. 2015 Science |
+| 두꺼비에게 삼켜져도 약 43%가 토해져 생존 (P. jessoensis, 2018) | 하 | Sugiura & Sato 2018 Biol. Lett. |
+| 애벌레는 땅강아지(Gryllotalpa orientalis) 알 둥지에 들어가 알을 먹고 자람 | 하 | https://entnemdept.ufl.edu/molecrickets/mcri0206.htm , https://dx.doi.org/10.1007/s10905-005-7021-8 |
+| 침노린재(Sirthenea flavipes)와 서로 닮아 둘 다 이득: 한쪽을 겪은 개구리는 다른 쪽도 덜 공격 (2023) | 하 | Sugiura & Hayashi 2023 PeerJ https://peerj.com/articles/15380 |
+| 분사 원리를 본뜬 분무 기술(µMist) - 소화기·연료 분사 응용 연구 | 중 | https://www.sciencedaily.com/releases/2008/04/080401170543.htm , https://www.nbcnews.com/news/amp/wbna24637825 |
+참고: 현재 학명은 Pheropsophus occipitalis jessoensis 로도 쓰임.
