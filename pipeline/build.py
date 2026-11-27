@@ -180,6 +180,7 @@ yy = np.arange(H)[:, None]
 a = np.clip((yy - H * 0.52) / (H * 0.3), 0, 1) * 200 + np.clip((H * 0.16 - yy) / (H * 0.16), 0, 1) * 120
 shade[..., 3] = a.astype(np.uint8)
 STATIC = Image.fromarray(shade, 'RGBA')
+STATIC_HOOK = STATIC.copy()  # 첫 장면용: 헤더·로고 없이 그림자만 (2026-11-27 실험 B)
 d = ImageDraw.Draw(STATIC)
 d.rounded_rectangle([70, 150, W - 70, 318], 34, fill=(0, 0, 0, 215))
 # 채널 로고(원형 + 금색 테두리)를 헤더 왼쪽에 고정
@@ -327,7 +328,7 @@ def compose(i, bg, s):
     hook = s is sc[0]
     if ls < 0.12 and not hook:  # flash on cut
         im = Image.blend(im, Image.new('RGBA', (W, H), (255, 255, 255, 255)), 0.35 * (1 - ls / 0.12))
-    im.alpha_composite(STATIC)
+    im.alpha_composite(STATIC_HOOK if (hook and S.get('clean_hook', True)) else STATIC)
     if s.get('card'):
         im = Image.alpha_composite(im, Image.new('RGBA', (W, H), (0, 0, 0, 110)))
         im = draw_card(im, S['card'], ls)
@@ -346,6 +347,8 @@ def compose(i, bg, s):
     cr = cap.resize((max(1, int(cap.width * sc_)), max(1, int(cap.height * sc_))), Image.BILINEAR)
     im.alpha_composite(cr, (int((W - cr.width) / 2), int(cy - cr.height / 2)))
     draw_sub(im, s, t, SUB_Y)
+    if hook and S.get('clean_hook', True):
+        return im.convert('RGB')  # 첫 장면은 진행 막대도 생략
     d = ImageDraw.Draw(im)
     prog = min(t / TOTAL, 1)
     d.rounded_rectangle([70, 1700, W - 70, 1720], 10, fill=(255, 255, 255, 90))
