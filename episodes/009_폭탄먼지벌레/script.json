@@ -35,7 +35,7 @@
  },
  "scenes": [
   {
-   "clip": "TBD",
+   "clip": "wmimg_142367550",
    "ss": 0,
    "cx": 0.5,
    "fit": true,
@@ -49,7 +49,7 @@
    ]
   },
   {
-   "clip": "TBD",
+   "clip": "wmimg_74205707",
    "ss": 0,
    "cx": 0.5,
    "fit": true,
@@ -64,7 +64,7 @@
    ]
   },
   {
-   "clip": "TBD",
+   "clip": "wmimg_142367565",
    "ss": 0,
    "cx": 0.5,
    "fit": true,
@@ -79,7 +79,7 @@
    ]
   },
   {
-   "clip": "TBD",
+   "clip": "wmimg_129430151",
    "ss": 0,
    "cx": 0.5,
    "fit": true,
@@ -93,7 +93,7 @@
    ]
   },
   {
-   "clip": "TBD",
+   "clip": "wmimg_74205494",
    "ss": 0,
    "cx": 0.5,
    "fit": true,
@@ -107,7 +107,7 @@
    ]
   },
   {
-   "clip": "TBD",
+   "clip": "wmimg_75664858",
    "ss": 0,
    "cx": 0.5,
    "fit": true,
@@ -121,7 +121,7 @@
    ]
   },
   {
-   "clip": "TBD",
+   "clip": "wmimg_142367550",
    "ss": 0,
    "cx": 0.5,
    "fit": true,
@@ -133,5 +133,6 @@
     1.05
    ]
   }
- ]
+ ],
+ "tail": 1.8
 }

@@ -138,7 +138,7 @@ for x in sc:
             d_ = (x['end'] - x['start']) * wi / tot
             x['subs'].append((acc, acc + d_ + (0.15 if c is chs[-1] else 0), c)); acc += d_
 voice = np.concatenate(parts)
-TOTAL = t + 0.8
+TOTAL = t + S.get('tail', 0.8)  # 카드 질문을 읽을 시간
 N = int(TOTAL * FPS)
 print('voice', round(TOTAL, 1), 's')
 
@@ -408,7 +408,7 @@ enc.stdin.close(); enc.wait()
 # ---------------- 6. upload metadata ----------------
 cred = {c['key']: c for c in json.load(open(os.path.join(CLIPS, 'credits.json')))}
 used = sorted({s['clip'] for s in sc})
-lines = [S['title'] + ' #shorts', '', *[s['text'] for s in sc], '', '#문어 #동물 #신기한사실 #동물상식 #shorts', '', '영상 출처 (Wikimedia Commons):']
+lines = [S['title'] + ' #shorts', '', *[s['text'] for s in sc], '', '#' + S['card']['name'].replace(' ', '') + ' #동물 #신기한사실 #동물상식 #shorts', '', '영상 출처 (Wikimedia Commons):']
 for u in used:
     c = cred[u]; lines.append(f"- \"{c['file']}\" by {c['artist']}, {c['license']} - {c['page']}")
 lines.append('음성: AI 내레이션 / 배경음악: 자체 제작')
